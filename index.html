@@ -235,7 +235,7 @@
     }
     .ticker-label::after { content: ''; width: 1px; height: 14px; background: rgba(255,255,255,.3); margin-left: 4px; }
     .ticker {
-      padding: 8px 0 8px 110px;
+      padding: 8px 0;
       white-space: nowrap;
       overflow: hidden;
     }
@@ -1443,6 +1443,140 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+
+    /* ─── NAV MEGA DROPDOWN ──────────────────────────────────────── */
+    .nav-item { position: relative; }
+    .nav-item:hover .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 3px); left: -16px;
+      min-width: 220px;
+      background: #111118;
+      border: 1px solid #222232;
+      border-top: 2px solid var(--red);
+      border-radius: 0 0 8px 8px;
+      padding: 10px 0;
+      box-shadow: 0 20px 50px rgba(0,0,0,.7);
+      opacity: 0; visibility: hidden;
+      transform: translateY(-8px);
+      transition: opacity .2s ease, transform .2s ease, visibility .2s;
+      z-index: 300;
+    }
+    .nav-dropdown a {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 18px;
+      font-size: 12px; font-weight: 600;
+      color: #888; border-bottom: none; border-left: none;
+      margin: 0; height: auto; letter-spacing: .03em;
+      text-transform: none; transition: color .15s, background .15s;
+    }
+    .nav-dropdown a:hover { color: var(--pure); background: rgba(67,56,202,.12); }
+    .nav-dropdown a .dd-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--red); flex-shrink: 0; opacity: .6;
+    }
+    .nav-dropdown a:hover .dd-dot { opacity: 1; }
+
+    /* ─── HERO CAROUSEL ──────────────────────────────────────────── */
+    .hero-carousel { position: relative; overflow: hidden; }
+    .hero-slides { display: flex; transition: transform .55s cubic-bezier(.4,0,.2,1); }
+    .hero-slide { flex-shrink: 0; width: 100%; }
+    .hero-dots {
+      position: absolute; bottom: 16px; right: 20px;
+      display: flex; gap: 6px; z-index: 5;
+    }
+    .hero-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: rgba(255,255,255,.3); cursor: pointer;
+      transition: all .2s; border: none;
+    }
+    .hero-dot.active { background: var(--red); transform: scale(1.3); }
+    .hero-prev, .hero-next {
+      position: absolute; top: 50%; z-index: 5;
+      transform: translateY(-50%);
+      width: 38px; height: 38px;
+      background: rgba(0,0,0,.55);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 50%;
+      color: white; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .18s;
+      backdrop-filter: blur(4px);
+    }
+    .hero-prev { left: 12px; }
+    .hero-next { right: 12px; }
+    .hero-prev:hover, .hero-next:hover { background: var(--red); border-color: var(--red); }
+
+    /* ─── POLL WIDGET ────────────────────────────────────────────── */
+    .poll-option {
+      position: relative;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color .18s;
+    }
+    .poll-option:hover { border-color: #3a3760; }
+    .poll-option.voted { cursor: default; }
+    .poll-bar {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      background: rgba(67,56,202,.18);
+      transition: width .7s cubic-bezier(.4,0,.2,1);
+      width: 0%;
+    }
+    .poll-option.winner .poll-bar { background: rgba(67,56,202,.3); }
+    .poll-label {
+      position: relative; z-index: 1;
+      display: flex; justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      font-size: 12.5px; font-weight: 600;
+    }
+    .poll-pct { font-size: 11px; color: var(--muted); font-weight: 700; opacity: 0; transition: opacity .3s; }
+    .poll-option.voted .poll-pct { opacity: 1; }
+    .poll-total { font-size: 10.5px; color: var(--muted2); text-align: right; margin-top: 6px; }
+
+    /* ─── TAG CLOUD ──────────────────────────────────────────────── */
+    .tag-cloud {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      padding: 4px 0;
+    }
+    .tag-cloud-item {
+      padding: 5px 13px;
+      border-radius: 4px;
+      font-size: 11.5px; font-weight: 700;
+      letter-spacing: .04em;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: #888;
+      cursor: pointer;
+      transition: all .18s;
+    }
+    .tag-cloud-item:hover { background: var(--red); border-color: var(--red); color: var(--pure); }
+    .tag-cloud-item .tc-count { font-size: 9.5px; color: var(--muted2); margin-left: 4px; font-weight: 600; }
+    .tag-cloud-item:hover .tc-count { color: rgba(255,255,255,.7); }
+
+    /* ─── NEWSLETTER CTA BACKGROUND ──────────────────────────────── */
+    .newsletter {
+      background: radial-gradient(ellipse at 70% 50%, rgba(67,56,202,.12) 0%, transparent 70%),
+                  radial-gradient(ellipse at 20% 80%, rgba(124,113,224,.08) 0%, transparent 60%),
+                  var(--surface);
+    }
+
+    /* ─── TICKER — SPEED VAR ─────────────────────────────────────── */
+    .ticker-inner { --speed: 45s; animation-duration: var(--speed); }
+
+    /* ─── CARD GRID HOVER LIFT SHADOW ────────────────────────────── */
+    .review-card:hover { border-color: rgba(67,56,202,.4); box-shadow: 0 12px 40px rgba(67,56,202,.15); }
+
+    /* ─── SCROLLED TOPBAR HIDE ───────────────────────────────────── */
+    .topbar {
+      transition: max-height .3s ease, opacity .3s ease;
+      max-height: 40px; overflow: hidden;
+    }
+    .topbar.hidden { max-height: 0; opacity: 0; }
   </style>
 </head>
 <body>
@@ -1552,12 +1686,12 @@
         <div class="logo-text">HITBOX <span>FEED</span></div>
       </a>
       <nav>
-        <a href="#" class="active">News</a>
-        <a href="#">Reviews</a>
-        <a href="#">Features</a>
+        <span class="nav-item"><a href="#" class="active">News</a><div class="nav-dropdown"><a href="#"><span class="dd-dot"></span>Latest News</a><a href="#"><span class="dd-dot"></span>PlayStation</a><a href="#"><span class="dd-dot"></span>Xbox</a><a href="#"><span class="dd-dot"></span>Nintendo</a><a href="#"><span class="dd-dot"></span>PC</a></div></span>
+        <span class="nav-item"><a href="#">Reviews</a><div class="nav-dropdown"><a href="#"><span class="dd-dot"></span>Game Reviews</a><a href="#"><span class="dd-dot"></span>Hardware Reviews</a><a href="#"><span class="dd-dot"></span>Review Round-ups</a></div></span>
+        <span class="nav-item"><a href="#">Features</a><div class="nav-dropdown"><a href="#"><span class="dd-dot"></span>Opinion</a><a href="#"><span class="dd-dot"></span>Interviews</a><a href="#"><span class="dd-dot"></span>Deep Dives</a></div></span>
         <a href="#">Lists</a>
         <a href="#">Videos</a>
-        <a href="#">Guides</a>
+        <span class="nav-item"><a href="#">Guides</a><div class="nav-dropdown"><a href="#"><span class="dd-dot"></span>Walkthroughs</a><a href="#"><span class="dd-dot"></span>Tips &amp; Tricks</a><a href="#"><span class="dd-dot"></span>Best Loadouts</a></div></span>
         <a href="#">Deals</a>
         <a href="#">Esports</a>
       </nav>
@@ -1577,10 +1711,6 @@
 
   <!-- TICKER -->
   <div class="ticker-wrap">
-    <div class="ticker-label">
-      <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="4" fill="white" opacity=".9"/></svg>
-      LIVE
-    </div>
     <div class="ticker">
       <div class="ticker-inner">
         <a href="#">GTA VI release date confirmed for May 2026</a><span class="sep">/</span>
@@ -1603,37 +1733,87 @@
 
     <!-- HERO -->
     <section class="hero" style="margin-top:24px;">
-      <div class="hero-main">
-        <svg viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <linearGradient id="hg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0d1b2a"/><stop offset="100%" stop-color="#0d0820"/></linearGradient>
-            <radialGradient id="hr" cx="75%" cy="35%" r="50%"><stop offset="0%" stop-color="rgba(67,56,202,0.12)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-          </defs>
-          <rect width="860" height="520" fill="url(#hg)"/>
-          <rect width="860" height="520" fill="url(#hr)"/>
-          <circle cx="680" cy="200" r="180" fill="none" stroke="rgba(67,56,202,0.07)" stroke-width="60"/>
-          <circle cx="680" cy="200" r="100" fill="none" stroke="rgba(67,56,202,0.1)" stroke-width="2"/>
-          <path d="M560 200 L680 140 L680 260 Z" fill="rgba(67,56,202,0.28)"/>
-          <rect x="40" y="80" width="280" height="180" rx="6" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-          <rect x="360" y="100" width="180" height="130" rx="4" fill="rgba(255,255,255,0.02)"/>
-          <text x="430" y="480" font-family="Arial" font-size="11" fill="rgba(255,255,255,0.08)" text-anchor="middle" letter-spacing="6">HITBOX FEED • FEATURED</text>
-        </svg>
-        <div class="hero-main-overlay"></div>
-        <div class="hero-main-content">
-          <span class="tag live">&#9679; Breaking</span>
-          <h1>GTA VI Release Date Officially Confirmed — Rockstar Sets May 2026 Window for PS5 &amp; Xbox Series X</h1>
-          <p class="excerpt">After years of speculation, Rockstar Games has officially locked in a release window, with pre-orders going live and a new trailer expected within the week.</p>
-          <div class="meta" style="margin-bottom:14px;">
-            <span class="avatar" style="background:#7c3aed;" title="Jamie Wilson">JW</span>
-            <span class="author">Jamie Wilson</span>
-            <span class="dot">&bull;</span>
-            <span>2 hours ago</span>
-            <span class="dot">&bull;</span>
-            <span>4 min read</span>
-            <span class="dot">&bull;</span>
-            <span>&#128065; 84K views</span>
+      <div class="hero-main hero-carousel" id="heroCarousel">
+        <div class="hero-slides" id="heroSlides">
+
+          <!-- SLIDE 1 -->
+          <div class="hero-slide">
+            <svg viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;">
+              <defs>
+                <linearGradient id="hg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0d1b2a"/><stop offset="100%" stop-color="#0d0820"/></linearGradient>
+                <radialGradient id="hr" cx="75%" cy="35%" r="50%"><stop offset="0%" stop-color="rgba(67,56,202,0.12)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+              </defs>
+              <rect width="860" height="520" fill="url(#hg)"/>
+              <rect width="860" height="520" fill="url(#hr)"/>
+              <circle cx="680" cy="200" r="180" fill="none" stroke="rgba(67,56,202,0.07)" stroke-width="60"/>
+              <circle cx="680" cy="200" r="100" fill="none" stroke="rgba(67,56,202,0.1)" stroke-width="2"/>
+              <path d="M560 200 L680 140 L680 260 Z" fill="rgba(67,56,202,0.28)"/>
+            </svg>
+            <div class="hero-main-overlay"></div>
+            <div class="hero-main-content">
+              <span class="tag live">&#9679; Breaking</span>
+              <h1>GTA VI Release Date Officially Confirmed — Rockstar Sets May 2026 Window</h1>
+              <p class="excerpt">After years of speculation, Rockstar Games has officially locked in a release window, with pre-orders going live and a new trailer expected within the week.</p>
+              <div class="meta" style="margin-bottom:14px;">
+                <span class="avatar" style="background:#7c3aed;" title="Jamie Wilson">JW</span>
+                <span class="author">Jamie Wilson</span><span class="dot">&bull;</span><span>2 hours ago</span><span class="dot">&bull;</span><span>4 min read</span><span class="dot">&bull;</span><span>&#128065; 84K views</span>
+              </div>
+              <a href="#" class="hero-read-btn">Read Full Story <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M7 3l3.5 3.5L7 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
           </div>
-          <a href="#" class="hero-read-btn">Read Full Story <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M7 3l3.5 3.5L7 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+
+          <!-- SLIDE 2 -->
+          <div class="hero-slide">
+            <svg viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;">
+              <defs><radialGradient id="hr2" cx="30%" cy="60%" r="55%"><stop offset="0%" stop-color="rgba(124,113,224,0.2)"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+              <rect width="860" height="520" fill="#0e0b1a"/>
+              <rect width="860" height="520" fill="url(#hr2)"/>
+              <polygon points="440,60 760,300 760,480 440,480 120,480 120,300" fill="none" stroke="rgba(124,113,224,0.07)" stroke-width="1"/>
+              <circle cx="200" cy="260" r="140" fill="none" stroke="rgba(67,56,202,0.1)" stroke-width="2"/>
+            </svg>
+            <div class="hero-main-overlay"></div>
+            <div class="hero-main-content">
+              <span class="tag">Reviews</span>
+              <h1>Elden Ring: Shadow of the Erdtree Review — A Masterpiece That Redefines DLC</h1>
+              <p class="excerpt">FromSoftware has outdone themselves. Shadow of the Erdtree is an enormous, harrowing, and magnificent expansion that belongs in gaming's hall of fame.</p>
+              <div class="meta" style="margin-bottom:14px;">
+                <span class="avatar" style="background:#4338ca;" title="James Murray">JM</span>
+                <span class="author">James Murray</span><span class="dot">&bull;</span><span>1 day ago</span><span class="dot">&bull;</span><span>8 min read</span><span class="dot">&bull;</span><span>&#128065; 212K views</span>
+              </div>
+              <a href="#" class="hero-read-btn">Read Full Review <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M7 3l3.5 3.5L7 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </div>
+
+          <!-- SLIDE 3 -->
+          <div class="hero-slide">
+            <svg viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;">
+              <defs><radialGradient id="hr3" cx="60%" cy="40%" r="50%"><stop offset="0%" stop-color="rgba(67,56,202,0.15)"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+              <rect width="860" height="520" fill="#080d18"/>
+              <rect width="860" height="520" fill="url(#hr3)"/>
+              <rect x="50" y="60" width="400" height="260" rx="10" fill="none" stroke="rgba(100,180,255,0.06)" stroke-width="1.5"/>
+              <circle cx="650" cy="220" r="160" fill="none" stroke="rgba(67,56,202,0.08)" stroke-width="50"/>
+            </svg>
+            <div class="hero-main-overlay"></div>
+            <div class="hero-main-content">
+              <span class="tag nintendo">Nintendo</span>
+              <h1>Switch 2 Sells 4 Million Units in First Week — Fastest Console Launch Ever</h1>
+              <p class="excerpt">Nintendo's new console has shattered all records, outselling the original Switch launch by three times and completely clearing retail stock worldwide.</p>
+              <div class="meta" style="margin-bottom:14px;">
+                <span class="avatar" style="background:#e63946;" title="Lisa Park">LP</span>
+                <span class="author">Lisa Park</span><span class="dot">&bull;</span><span>3 days ago</span><span class="dot">&bull;</span><span>5 min read</span><span class="dot">&bull;</span><span>&#128065; 156K views</span>
+              </div>
+              <a href="#" class="hero-read-btn">Read Full Story <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M7 3l3.5 3.5L7 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </div>
+
+        </div><!-- /hero-slides -->
+
+        <button class="hero-prev" id="heroPrev">&#8249;</button>
+        <button class="hero-next" id="heroNext">&#8250;</button>
+        <div class="hero-dots" id="heroDots">
+          <button class="hero-dot active" data-slide="0"></button>
+          <button class="hero-dot" data-slide="1"></button>
+          <button class="hero-dot" data-slide="2"></button>
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:6px;">
@@ -1880,6 +2060,19 @@
             <div class="follow-card ig"><span class="fcount">2.5M</span><span class="fname">Instagram</span></div>
             <div class="follow-card yt"><span class="fcount">980K</span><span class="fname">YouTube</span></div>
           </div>
+        </div>
+
+        <!-- POLL WIDGET -->
+        <div class="widget">
+          <div class="widget-title">&#128202; Reader Poll</div>
+          <p style="font-size:12px;color:#666;margin-bottom:14px;">Which game are you most hyped for?</p>
+          <div id="pollOptions">
+            <div class="poll-option" data-pct="52" onclick="castVote(this)"><div class="poll-bar"></div><div class="poll-label"><span>GTA VI</span><span class="poll-pct">52%</span></div></div>
+            <div class="poll-option" data-pct="21" onclick="castVote(this)"><div class="poll-bar"></div><div class="poll-label"><span>Elden Ring DLC</span><span class="poll-pct">21%</span></div></div>
+            <div class="poll-option" data-pct="18" onclick="castVote(this)"><div class="poll-bar"></div><div class="poll-label"><span>Switch 2 titles</span><span class="poll-pct">18%</span></div></div>
+            <div class="poll-option" data-pct="9" onclick="castVote(this)"><div class="poll-bar"></div><div class="poll-label"><span>Fable (2025)</span><span class="poll-pct">9%</span></div></div>
+          </div>
+          <div class="poll-total" id="pollTotal">22,847 votes</div>
         </div>
 
         <div class="widget">
@@ -2289,6 +2482,32 @@
         </div>
       </div>
 
+    </div>
+
+    <!-- TAG CLOUD -->
+    <div class="section-head" style="margin-top:0;">
+      <div class="section-accent"></div>
+      <h2>Browse by Topic</h2>
+    </div>
+    <div class="tag-cloud" style="margin-bottom:60px;">
+      <span class="tag-cloud-item">GTA VI <span class="tc-count">1.2k</span></span>
+      <span class="tag-cloud-item">PlayStation 6 <span class="tc-count">844</span></span>
+      <span class="tag-cloud-item">Switch 2 <span class="tc-count">921</span></span>
+      <span class="tag-cloud-item">Elden Ring <span class="tc-count">1.4k</span></span>
+      <span class="tag-cloud-item">Fortnite <span class="tc-count">677</span></span>
+      <span class="tag-cloud-item">Baldur's Gate 3 <span class="tc-count">512</span></span>
+      <span class="tag-cloud-item">Call of Duty <span class="tc-count">589</span></span>
+      <span class="tag-cloud-item">Esports <span class="tc-count">430</span></span>
+      <span class="tag-cloud-item">Indie Games <span class="tc-count">318</span></span>
+      <span class="tag-cloud-item">Game Pass <span class="tc-count">402</span></span>
+      <span class="tag-cloud-item">PC Gaming <span class="tc-count">355</span></span>
+      <span class="tag-cloud-item">JRPG <span class="tc-count">290</span></span>
+      <span class="tag-cloud-item">Minecraft <span class="tc-count">274</span></span>
+      <span class="tag-cloud-item">Retro Gaming <span class="tc-count">198</span></span>
+      <span class="tag-cloud-item">VR / AR <span class="tc-count">143</span></span>
+      <span class="tag-cloud-item">Game Leaks <span class="tc-count">761</span></span>
+      <span class="tag-cloud-item">DLC & Expansions <span class="tc-count">366</span></span>
+      <span class="tag-cloud-item">Steam Deals <span class="tc-count">221</span></span>
     </div>
 
   </div><!-- /page-wrap -->
@@ -2705,6 +2924,57 @@
         });
       }, { threshold: 0.5 });
       counters.forEach(function(c) { cntObs.observe(c); });
+    }
+
+    /* ── TOPBAR HIDE ON SCROLL ─────────────────────────────────── */
+    var topbar = document.querySelector('.topbar');
+    var lastScroll = 0;
+    window.addEventListener('scroll', function() {
+      var s = window.scrollY;
+      if (s > 80 && s > lastScroll) { topbar.classList.add('hidden'); }
+      else if (s < lastScroll - 10) { topbar.classList.remove('hidden'); }
+      lastScroll = s;
+    }, { passive: true });
+
+    /* ── HERO CAROUSEL ─────────────────────────────────────────── */
+    (function() {
+      var slides = document.getElementById('heroSlides');
+      var dots = document.querySelectorAll('.hero-dot');
+      var total = 3;
+      var current = 0;
+      var timer;
+
+      function goTo(n) {
+        current = (n + total) % total;
+        slides.style.transform = 'translateX(-' + (current * 100) + '%)';
+        dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+      }
+
+      function startAuto() { timer = setInterval(function() { goTo(current + 1); }, 6000); }
+      function stopAuto() { clearInterval(timer); }
+
+      document.getElementById('heroPrev').addEventListener('click', function() { stopAuto(); goTo(current - 1); startAuto(); });
+      document.getElementById('heroNext').addEventListener('click', function() { stopAuto(); goTo(current + 1); startAuto(); });
+      dots.forEach(function(d) {
+        d.addEventListener('click', function() { stopAuto(); goTo(+d.getAttribute('data-slide')); startAuto(); });
+      });
+
+      startAuto();
+    })();
+
+    /* ── POLL ──────────────────────────────────────────────────── */
+    function castVote(el) {
+      var opts = document.querySelectorAll('.poll-option');
+      var alreadyVoted = Array.from(opts).some(function(o) { return o.classList.contains('voted'); });
+      if (alreadyVoted) return;
+      opts.forEach(function(o) {
+        o.classList.add('voted');
+        var pct = +o.getAttribute('data-pct');
+        o.querySelector('.poll-bar').style.width = pct + '%';
+        if (o === el) { o.classList.add('winner'); }
+      });
+      el.querySelector('.poll-label').style.color = 'var(--pure)';
+      document.getElementById('pollTotal').textContent = '22,848 votes — thanks for voting!';
     }
   </script>
 
