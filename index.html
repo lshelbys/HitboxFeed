@@ -948,9 +948,392 @@
       .newsletter h2 { font-size: 28px; }
       .nl-form { flex-direction: column; }
     }
+
+    /* ─── READING PROGRESS BAR ──────────────────────────────────── */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--red-dark), var(--red), #ff6b7a);
+      z-index: 9999;
+      transition: width .05s linear;
+      pointer-events: none;
+    }
+
+    /* ─── ALERT BANNER ──────────────────────────────────────────── */
+    .alert-banner {
+      background: linear-gradient(90deg, #1a0008, #200010, #1a0008);
+      border-bottom: 1px solid rgba(232,25,44,.35);
+      padding: 9px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 12px;
+      position: relative;
+    }
+    .alert-banner .alert-icon { color: var(--red); font-size: 14px; animation: pulse-live 2s ease-in-out infinite; }
+    .alert-banner .alert-text { color: #ddd; }
+    .alert-banner .alert-text strong { color: var(--pure); }
+    .alert-banner .alert-link { color: var(--red); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+    .alert-banner .alert-dismiss {
+      position: absolute;
+      right: 16px; top: 50%;
+      transform: translateY(-50%);
+      background: none; border: none;
+      color: #555; cursor: pointer;
+      font-size: 18px; line-height: 1;
+      padding: 4px; transition: color .18s;
+    }
+    .alert-banner .alert-dismiss:hover { color: var(--white); }
+
+    /* ─── MOBILE DRAWER ─────────────────────────────────────────── */
+    .drawer-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.7);
+      z-index: 300;
+      backdrop-filter: blur(2px);
+    }
+    .drawer-overlay.open { display: block; }
+    .drawer {
+      position: fixed;
+      top: 0; left: -300px;
+      width: 280px; height: 100%;
+      background: var(--darker);
+      border-right: 1px solid #222;
+      z-index: 301;
+      transition: left .3s cubic-bezier(.4,0,.2,1);
+      overflow-y: auto;
+    }
+    .drawer.open { left: 0; }
+    .drawer-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid #1e1e1e;
+    }
+    .drawer-close {
+      background: none; border: none;
+      color: #666; cursor: pointer;
+      font-size: 22px; line-height: 1;
+      transition: color .18s;
+    }
+    .drawer-close:hover { color: var(--white); }
+    .drawer nav {
+      display: flex !important;
+      flex-direction: column;
+      height: auto;
+      padding: 10px 0;
+    }
+    .drawer nav a {
+      padding: 14px 22px;
+      font-size: 14px;
+      border-bottom: none;
+      border-left: 3px solid transparent;
+      margin: 0;
+      color: #999;
+    }
+    .drawer nav a:hover, .drawer nav a.active {
+      color: var(--pure);
+      border-left-color: var(--red);
+      background: rgba(232,25,44,.05);
+    }
+
+    /* ─── SEARCH OVERLAY ────────────────────────────────────────── */
+    .search-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(8,8,8,.95);
+      z-index: 400;
+      backdrop-filter: blur(8px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 120px;
+    }
+    .search-overlay.open { display: flex; }
+    .search-overlay-inner { width: 100%; max-width: 680px; padding: 0 24px; }
+    .search-overlay h3 {
+      font-family: var(--heading-font);
+      font-size: 13px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: .12em;
+      color: var(--muted); margin-bottom: 20px;
+    }
+    .search-overlay-input {
+      position: relative;
+    }
+    .search-overlay-input input {
+      width: 100%;
+      background: var(--surface);
+      border: 2px solid var(--red);
+      border-radius: 8px;
+      color: var(--pure);
+      font-size: 22px;
+      padding: 18px 56px 18px 20px;
+      outline: none;
+      font-family: var(--body-font);
+    }
+    .search-overlay-input button {
+      position: absolute; right: 14px; top: 50%;
+      transform: translateY(-50%);
+      background: none; border: none;
+      color: #555; cursor: pointer; font-size: 22px;
+      transition: color .18s;
+    }
+    .search-overlay-input button:hover { color: var(--white); }
+    .search-trending {
+      margin-top: 28px;
+    }
+    .search-trending h4 {
+      font-size: 11px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: .12em;
+      color: var(--muted2); margin-bottom: 12px;
+    }
+    .search-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .search-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 12px; color: #888;
+      cursor: pointer; transition: all .18s;
+    }
+    .search-chip:hover { border-color: var(--red); color: var(--white); }
+
+    /* ─── PLATFORM TAGS ─────────────────────────────────────────── */
+    .tag.ps  { background: #003791; }
+    .tag.xbox { background: #107c10; }
+    .tag.nintendo { background: #e4000f; }
+    .tag.pc  { background: #6a0dad; }
+    .tag.new { background: #0066cc; }
+    .tag.hot { background: #cc3300; }
+
+    /* ─── BADGE RIBBONS ─────────────────────────────────────────── */
+    .badge-ribbon {
+      position: absolute;
+      top: 10px; right: 10px;
+      font-size: 9px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: .1em;
+      padding: 3px 8px; border-radius: 3px;
+      color: var(--pure); z-index: 2;
+    }
+    .badge-ribbon.new { background: #0066cc; }
+    .badge-ribbon.hot { background: linear-gradient(135deg,#cc3300,#ff5500); }
+
+    /* ─── AUTHOR AVATARS ────────────────────────────────────────── */
+    .avatar {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 9px; font-weight: 800; color: var(--pure);
+      flex-shrink: 0;
+      letter-spacing: 0;
+    }
+
+    /* ─── SCORE BARS ────────────────────────────────────────────── */
+    .score-bar-wrap { margin: 10px 0; }
+    .score-bar-label {
+      display: flex; justify-content: space-between;
+      font-size: 10.5px; color: var(--muted); margin-bottom: 4px;
+    }
+    .score-bar-label span:last-child { color: var(--white); font-weight: 700; }
+    .score-bar-track {
+      height: 4px; background: var(--border); border-radius: 2px; overflow: hidden;
+    }
+    .score-bar-fill {
+      height: 100%; border-radius: 2px;
+      background: linear-gradient(90deg, var(--red-dark), var(--red));
+      width: 0%;
+      transition: width 1.2s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ─── DEAL STRIP ────────────────────────────────────────────── */
+    .deal-strip {
+      background: linear-gradient(135deg, #0d1520 0%, #1a0815 50%, #0d0d0d 100%);
+      border: 1px solid #222;
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin: 20px 0 40px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 24px;
+      align-items: center;
+    }
+    .deal-badge {
+      background: var(--red);
+      border-radius: 8px;
+      padding: 14px 18px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .deal-badge .deal-off {
+      font-family: var(--heading-font);
+      font-size: 34px; font-weight: 900;
+      line-height: 1; color: var(--pure);
+    }
+    .deal-badge .deal-label {
+      font-size: 9px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: .12em;
+      color: rgba(255,255,255,.8);
+    }
+    .deal-info h3 {
+      font-family: var(--heading-font);
+      font-size: 22px; font-weight: 900;
+      color: var(--pure); margin-bottom: 4px;
+    }
+    .deal-info p { font-size: 12.5px; color: #666; line-height: 1.55; }
+    .deal-price {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .deal-price .was { font-size: 12px; color: #555; text-decoration: line-through; margin-bottom: 2px; }
+    .deal-price .now {
+      font-family: var(--heading-font);
+      font-size: 32px; font-weight: 900;
+      color: var(--red); line-height: 1;
+    }
+    .deal-price .btn-deal {
+      display: block; margin-top: 8px;
+      background: var(--red); color: var(--pure);
+      border: none; border-radius: 5px;
+      padding: 8px 18px; font-size: 11px;
+      font-weight: 800; text-transform: uppercase;
+      letter-spacing: .08em; cursor: pointer;
+      font-family: var(--body-font);
+      transition: background .18s;
+    }
+    .deal-price .btn-deal:hover { background: var(--red-dark); }
+    @media (max-width: 700px) {
+      .deal-strip { grid-template-columns: 1fr; gap: 16px; }
+      .deal-price { text-align: left; }
+    }
+
+    /* ─── UPCOMING RELEASES WIDGET ──────────────────────────────── */
+    .release-list { display: flex; flex-direction: column; gap: 0; }
+    .release-item {
+      display: flex; gap: 12px; align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .release-item:last-child { border-bottom: none; }
+    .release-date {
+      width: 40px; text-align: center; flex-shrink: 0;
+    }
+    .release-date .rday {
+      font-family: var(--heading-font);
+      font-size: 22px; font-weight: 900;
+      line-height: 1; color: var(--pure);
+    }
+    .release-date .rmon {
+      font-size: 9px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--red);
+    }
+    .release-info h5 { font-size: 12px; font-weight: 700; margin-bottom: 2px; }
+    .release-info h5 a:hover { color: var(--red); }
+    .release-info .rplatform { font-size: 10px; color: var(--muted); }
+
+    /* ─── MOST DISCUSSED WIDGET ─────────────────────────────────── */
+    .discussed-list { display: flex; flex-direction: column; gap: 0; }
+    .discussed-item {
+      display: flex; gap: 10px; align-items: flex-start;
+      padding: 10px 0; border-bottom: 1px solid var(--border);
+    }
+    .discussed-item:last-child { border-bottom: none; }
+    .discussed-rank {
+      font-family: var(--heading-font); font-size: 18px;
+      font-weight: 900; color: #2a2a2a;
+      min-width: 24px; flex-shrink: 0; line-height: 1.2;
+    }
+    .discussed-info h5 { font-size: 12px; font-weight: 700; line-height: 1.4; margin-bottom: 3px; }
+    .discussed-info h5 a:hover { color: var(--red); }
+    .discussed-count { font-size: 10px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+    .discussed-count svg { opacity: .5; }
+
+    /* ─── CARD REVEAL ANIMATION ─────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─── NEWSLETTER SUCCESS ────────────────────────────────────── */
+    .nl-success {
+      display: none;
+      flex-direction: column; align-items: center; gap: 10px;
+      padding: 20px 0;
+    }
+    .nl-success .nl-check {
+      width: 52px; height: 52px;
+      background: rgba(232,25,44,.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nl-success h3 { font-family: var(--heading-font); font-size: 26px; font-weight: 900; }
+    .nl-success p { font-size: 13px; color: #666; }
+    .nl-error { font-size: 12px; color: #ff6b7a; margin-top: 6px; display: none; }
   </style>
 </head>
 <body>
+
+  <!-- PROGRESS BAR -->
+  <div id="progress-bar"></div>
+
+  <!-- ALERT BANNER -->
+  <div class="alert-banner" id="alertBanner">
+    <span class="alert-icon">&#9679;</span>
+    <span class="alert-text"><strong>BREAKING:</strong> GTA VI officially dated — <a href="#" class="alert-link">pre-orders now live</a>, new trailer dropping this week</span>
+    <button class="alert-dismiss" id="alertDismiss" title="Dismiss">&#215;</button>
+  </div>
+
+  <!-- MOBILE DRAWER -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <div class="drawer" id="drawer">
+    <div class="drawer-header">
+      <a href="#" class="logo">
+        <div class="logo-icon"><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><rect x="8" y="2" width="4" height="16" rx="2" fill="white" opacity=".9"/><rect x="2" y="8" width="16" height="4" rx="2" fill="white" opacity=".9"/></svg></div>
+        <div class="logo-text" style="font-size:18px;">HITBOX <span>FEED</span></div>
+      </a>
+      <button class="drawer-close" id="drawerClose">&#215;</button>
+    </div>
+    <nav>
+      <a href="#" class="active">News</a>
+      <a href="#">Reviews</a>
+      <a href="#">Features</a>
+      <a href="#">Lists</a>
+      <a href="#">Videos</a>
+      <a href="#">Guides</a>
+      <a href="#">Deals</a>
+      <a href="#">Esports</a>
+    </nav>
+  </div>
+
+  <!-- SEARCH OVERLAY -->
+  <div class="search-overlay" id="searchOverlay">
+    <div class="search-overlay-inner">
+      <h3>Search Hitbox Feed</h3>
+      <div class="search-overlay-input">
+        <input type="search" id="searchOverlayInput" placeholder="Search for games, reviews, news..." autofocus />
+        <button id="searchOverlayClose">&#215;</button>
+      </div>
+      <div class="search-trending">
+        <h4>Trending Searches</h4>
+        <div class="search-chips">
+          <div class="search-chip">GTA VI</div>
+          <div class="search-chip">Switch 2</div>
+          <div class="search-chip">Elden Ring DLC</div>
+          <div class="search-chip">Black Ops 7</div>
+          <div class="search-chip">Baldur's Gate 3</div>
+          <div class="search-chip">Fortnite Season 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- TOP BAR -->
   <div class="topbar">
@@ -991,12 +1374,12 @@
         <a href="#">Esports</a>
       </nav>
       <div class="header-right">
-        <div class="search-box">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4.5" stroke="white" stroke-width="1.5"/><path d="M9.5 9.5L12 12" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
-          <input type="search" placeholder="Search Hitbox Feed..." />
-        </div>
-        <button class="btn-nl">Newsletter</button>
-        <div class="hamburger" role="button" aria-label="Menu">
+        <button id="searchBtn" style="background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:7px;color:#777;font-size:12px;font-family:var(--body-font);font-weight:600;padding:7px 12px;border-radius:20px;border:1px solid #252525;transition:all .18s;" onmouseover="this.style.color='#fff';this.style.borderColor='#444';" onmouseout="this.style.color='#777';this.style.borderColor='#252525';">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.5"/><path d="M9.5 9.5L12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Search
+        </button>
+        <button class="btn-nl" onclick="document.getElementById('newsletter-section').scrollIntoView({behavior:'smooth'})">Newsletter</button>
+        <div class="hamburger" id="hamburger" role="button" aria-label="Menu">
           <span></span><span></span><span></span>
         </div>
       </div>
@@ -1115,7 +1498,7 @@
     </div>
     <div class="card-grid four" style="margin-bottom:40px;">
 
-      <div class="card">
+      <div class="card reveal" data-cat="xbox">
         <div class="card-thumb">
           <svg class="ph" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
             <rect width="320" height="180" fill="#0d1a2a"/>
@@ -1124,15 +1507,19 @@
             <circle cx="160" cy="90" r="42" fill="none" stroke="rgba(229,23,63,0.2)" stroke-width="1.5"/>
             <path d="M143 72 L180 90 L143 108 Z" fill="rgba(229,23,63,0.45)"/>
           </svg>
-          <span class="card-tag tag">Xbox</span>
+          <span class="card-tag tag xbox">Xbox</span>
+          <span class="badge-ribbon hot">HOT &#x1F525;</span>
         </div>
         <div class="card-body">
           <h3><a href="#">Call of Duty Black Ops 7 Officially Announced — Everything We Know So Far</a></h3>
-          <div class="card-meta"><span class="author">Alex Reed</span><span class="dot">&bull;</span><span>3h ago</span><span class="dot">&bull;</span><span>3 min</span></div>
+          <div class="card-meta">
+            <span class="avatar" style="background:#c0392b;" title="Alex Reed">AR</span>
+            <span class="author">Alex Reed</span><span class="dot">&bull;</span><span>3h ago</span><span class="dot">&bull;</span><span>3 min</span>
+          </div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card reveal" data-cat="fortnite">
         <div class="card-thumb">
           <svg class="ph" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
             <rect width="320" height="180" fill="#1a0d2a"/>
@@ -1140,14 +1527,18 @@
             <circle cx="160" cy="90" r="22" fill="rgba(180,100,255,0.15)" stroke="rgba(180,100,255,0.35)" stroke-width="1.5"/>
           </svg>
           <span class="card-tag tag">Fortnite</span>
+          <span class="badge-ribbon new">NEW</span>
         </div>
         <div class="card-body">
           <h3><a href="#">Fortnite Chapter 6 Season 2 Map Changes Are Completely Insane — Full Breakdown</a></h3>
-          <div class="card-meta"><span class="author">Sarah Cox</span><span class="dot">&bull;</span><span>5h ago</span><span class="dot">&bull;</span><span>4 min</span></div>
+          <div class="card-meta">
+            <span class="avatar" style="background:#8e44ad;" title="Sarah Cox">SC</span>
+            <span class="author">Sarah Cox</span><span class="dot">&bull;</span><span>5h ago</span><span class="dot">&bull;</span><span>4 min</span>
+          </div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card reveal" data-cat="pc">
         <div class="card-thumb">
           <svg class="ph" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
             <rect width="320" height="180" fill="#0d2a0d"/>
@@ -1156,26 +1547,33 @@
             <line x1="160" y1="45" x2="160" y2="135" stroke="rgba(80,200,80,0.1)" stroke-width="1"/>
             <circle cx="160" cy="90" r="16" fill="rgba(80,200,80,0.15)"/>
           </svg>
-          <span class="card-tag tag">PC</span>
+          <span class="card-tag tag pc">PC</span>
         </div>
         <div class="card-body">
           <h3><a href="#">Baldur's Gate 3 Patch 8 Adds 12 New Subclasses — Full Patch Notes Inside</a></h3>
-          <div class="card-meta"><span class="author">Tom Hayes</span><span class="dot">&bull;</span><span>7h ago</span><span class="dot">&bull;</span><span>5 min</span></div>
+          <div class="card-meta">
+            <span class="avatar" style="background:#27ae60;" title="Tom Hayes">TH</span>
+            <span class="author">Tom Hayes</span><span class="dot">&bull;</span><span>7h ago</span><span class="dot">&bull;</span><span>5 min</span>
+          </div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card reveal" data-cat="playstation">
         <div class="card-thumb">
           <svg class="ph" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
             <rect width="320" height="180" fill="#2a1a0d"/>
             <polygon points="160,30 280,150 40,150" fill="none" stroke="rgba(255,160,60,0.25)" stroke-width="1.5"/>
             <polygon points="160,68 226,145 94,145" fill="rgba(255,160,60,0.08)"/>
           </svg>
-          <span class="card-tag tag">PlayStation</span>
+          <span class="card-tag tag ps">PlayStation</span>
+          <span class="badge-ribbon new">NEW</span>
         </div>
         <div class="card-body">
           <h3><a href="#">God of War Ragnarok PC Port Gets Release Date and System Requirements</a></h3>
-          <div class="card-meta"><span class="author">Mia Banks</span><span class="dot">&bull;</span><span>9h ago</span><span class="dot">&bull;</span><span>3 min</span></div>
+          <div class="card-meta">
+            <span class="avatar" style="background:#2980b9;" title="Mia Banks">MB</span>
+            <span class="author">Mia Banks</span><span class="dot">&bull;</span><span>9h ago</span><span class="dot">&bull;</span><span>3 min</span>
+          </div>
         </div>
       </div>
 
@@ -1307,12 +1705,72 @@
           </div>
         </div>
 
+        <!-- Upcoming Releases -->
+        <div class="widget">
+          <div class="widget-title">&#128197; Upcoming Releases</div>
+          <div class="release-list">
+            <div class="release-item">
+              <div class="release-date"><div class="rday">22</div><div class="rmon">Jun</div></div>
+              <div class="release-info"><h5><a href="#">Elden Ring: Nightreign</a></h5><div class="rplatform">PS5 / Xbox / PC</div></div>
+            </div>
+            <div class="release-item">
+              <div class="release-date"><div class="rday">05</div><div class="rmon">Jul</div></div>
+              <div class="release-info"><h5><a href="#">Hollow Knight: Silksong</a></h5><div class="rplatform">PC / Switch 2</div></div>
+            </div>
+            <div class="release-item">
+              <div class="release-date"><div class="rday">18</div><div class="rmon">Jul</div></div>
+              <div class="release-info"><h5><a href="#">Marvel Rivals Season 3</a></h5><div class="rplatform">All Platforms</div></div>
+            </div>
+            <div class="release-item">
+              <div class="release-date"><div class="rday">02</div><div class="rmon">Aug</div></div>
+              <div class="release-info"><h5><a href="#">Fable (2025)</a></h5><div class="rplatform">Xbox Series X / PC</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Most Discussed -->
+        <div class="widget">
+          <div class="widget-title">&#128172; Most Discussed</div>
+          <div class="discussed-list">
+            <div class="discussed-item">
+              <div class="discussed-rank">01</div>
+              <div class="discussed-info">
+                <h5><a href="#">Is GTA VI Worth the 12-Year Wait? The Community Weighs In</a></h5>
+                <div class="discussed-count">
+                  <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v7H1zM3.5 8v2l2-2" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+                  4,812 comments
+                </div>
+              </div>
+            </div>
+            <div class="discussed-item">
+              <div class="discussed-rank">02</div>
+              <div class="discussed-info">
+                <h5><a href="#">Switch 2 vs PS5 — Which Console Is Actually Worth Buying?</a></h5>
+                <div class="discussed-count">
+                  <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v7H1zM3.5 8v2l2-2" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+                  2,340 comments
+                </div>
+              </div>
+            </div>
+            <div class="discussed-item">
+              <div class="discussed-rank">03</div>
+              <div class="discussed-info">
+                <h5><a href="#">Why Gamers Are Sick of Live Service Games</a></h5>
+                <div class="discussed-count">
+                  <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 1h9v7H1zM3.5 8v2l2-2" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+                  1,987 comments
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Sidebar newsletter -->
         <div class="widget" style="background: linear-gradient(145deg, #160008 0%, #220010 100%); border-color: #330015; text-align:center;">
           <div class="widget-title" style="justify-content:center;">Daily Digest</div>
           <p style="font-size:12.5px;color:#666;line-height:1.65;margin-bottom:14px;">Top gaming stories every morning. Zero spam.</p>
-          <input type="email" placeholder="your@email.com" style="width:100%;background:#0d0007;border:1px solid #2e0010;border-radius:5px;color:white;padding:10px 12px;font-size:12.5px;margin-bottom:8px;outline:none;font-family:inherit;"/>
-          <button style="width:100%;background:var(--red);color:white;border:none;border-radius:5px;padding:10px;font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;font-family:inherit;transition:background .18s;" onmouseover="this.style.background='#b5111e'" onmouseout="this.style.background='var(--red)'">Subscribe Free</button>
+          <input type="email" id="sidebarEmail" placeholder="your@email.com" style="width:100%;background:#0d0007;border:1px solid #2e0010;border-radius:5px;color:white;padding:10px 12px;font-size:12.5px;margin-bottom:8px;outline:none;font-family:inherit;"/>
+          <button id="sidebarSubBtn" style="width:100%;background:var(--red);color:white;border:none;border-radius:5px;padding:10px;font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;font-family:inherit;transition:background .18s;" onmouseover="this.style.background='#b5111e'" onmouseout="this.style.background='var(--red)'">Subscribe Free</button>
         </div>
 
       </aside>
@@ -1384,7 +1842,7 @@
     </div>
     <div class="review-grid" style="margin-bottom:40px;">
 
-      <div class="review-card">
+      <div class="review-card reveal">
         <div class="review-thumb">
           <svg class="ph" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
             <rect width="320" height="180" fill="#0d1a2a"/>
@@ -1393,15 +1851,23 @@
           <div class="review-score-badge">9.5</div>
         </div>
         <div class="review-body">
-          <span class="tag">PS5 / Xbox</span>
+          <span class="tag ps">PS5 / Xbox</span>
           <h3><a href="#">Elden Ring: Shadow of the Erdtree</a></h3>
           <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <div class="score-bar-wrap">
+            <div class="score-bar-label"><span>Gameplay</span><span>9.8</span></div>
+            <div class="score-bar-track"><div class="score-bar-fill" data-width="98"></div></div>
+          </div>
+          <div class="score-bar-wrap">
+            <div class="score-bar-label"><span>Visuals</span><span>9.4</span></div>
+            <div class="score-bar-track"><div class="score-bar-fill" data-width="94"></div></div>
+          </div>
           <p>FromSoftware's expansion delivers a breathtaking new world, brutal bosses, and layered lore that cements this as essential DLC — possibly the best expansion ever made.</p>
           <div class="card-meta"><span class="author">James Murray</span><span class="dot">&bull;</span><span>1 week ago</span></div>
         </div>
       </div>
 
-      <div class="review-card">
+      <div class="review-card reveal">
         <div class="review-thumb">
           <svg class="ph" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
             <rect width="320" height="180" fill="#1a0d2a"/>
@@ -1411,15 +1877,23 @@
           <div class="review-score-badge">8.8</div>
         </div>
         <div class="review-body">
-          <span class="tag">Nintendo Switch 2</span>
+          <span class="tag nintendo">Nintendo Switch 2</span>
           <h3><a href="#">Mario Kart World</a></h3>
           <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+          <div class="score-bar-wrap">
+            <div class="score-bar-label"><span>Fun Factor</span><span>9.5</span></div>
+            <div class="score-bar-track"><div class="score-bar-fill" data-width="95"></div></div>
+          </div>
+          <div class="score-bar-wrap">
+            <div class="score-bar-label"><span>Track Design</span><span>8.2</span></div>
+            <div class="score-bar-track"><div class="score-bar-fill" data-width="82"></div></div>
+          </div>
           <p>Nintendo's showcase racer for Switch 2 is inventive and gorgeous, with the open-world format adding real depth — though a handful of tracks don't quite match the highs.</p>
           <div class="card-meta"><span class="author">Lisa Park</span><span class="dot">&bull;</span><span>2 weeks ago</span></div>
         </div>
       </div>
 
-      <div class="review-card">
+      <div class="review-card reveal">
         <div class="review-thumb">
           <svg class="ph" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
             <rect width="320" height="180" fill="#2a1a0d"/>
@@ -1429,9 +1903,17 @@
           <div class="review-score-badge">9.2</div>
         </div>
         <div class="review-body">
-          <span class="tag">PS5 / PC</span>
+          <span class="tag ps">PS5 / PC</span>
           <h3><a href="#">Horizon: Burning Shores</a></h3>
           <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <div class="score-bar-wrap">
+            <div class="score-bar-label"><span>Story</span><span>9.0</span></div>
+            <div class="score-bar-track"><div class="score-bar-fill" data-width="90"></div></div>
+          </div>
+          <div class="score-bar-wrap">
+            <div class="score-bar-label"><span>Visuals</span><span>9.8</span></div>
+            <div class="score-bar-track"><div class="score-bar-fill" data-width="98"></div></div>
+          </div>
           <p>A visually breathtaking farewell set in LA's ruins, showcasing everything that makes the Horizon series special. Some of the best machine boss encounters in the series to date.</p>
           <div class="card-meta"><span class="author">Ryan Cole</span><span class="dot">&bull;</span><span>3 weeks ago</span></div>
         </div>
@@ -1490,16 +1972,47 @@
 
     </div>
 
+    <!-- DEAL OF THE WEEK -->
+    <div class="section-head">
+      <div class="section-accent"></div>
+      <h2>Deal of the Week</h2>
+    </div>
+    <div class="deal-strip reveal">
+      <div class="deal-badge">
+        <div class="deal-off">40%</div>
+        <div class="deal-label">OFF</div>
+      </div>
+      <div class="deal-info">
+        <h3>Elden Ring: Shadow of the Erdtree — Complete Edition</h3>
+        <p>Base game + all DLC. Digital download available on PS5, Xbox Series X|S, and PC via Steam. Limited time offer — ends Sunday at midnight.</p>
+      </div>
+      <div class="deal-price">
+        <div class="was">Was $89.99</div>
+        <div class="now">$53.99</div>
+        <button class="btn-deal">Grab Deal</button>
+      </div>
+    </div>
+
     <!-- NEWSLETTER -->
-    <div class="newsletter">
+    <div class="newsletter" id="newsletter-section">
       <div class="nl-eyebrow">&#9679; Join 500,000+ Readers</div>
       <h2>Stay Plugged In to <span>The Feed</span></h2>
       <p>The biggest gaming stories, reviews, and guides delivered every morning.<br>No filler, no spam. Just pure gaming content.</p>
-      <div class="nl-form">
-        <input type="email" placeholder="Enter your email address..." />
-        <button type="submit">Subscribe Free</button>
+      <div id="nl-form-wrap">
+        <div class="nl-form" id="nl-form">
+          <input type="email" id="nl-email" placeholder="Enter your email address..." />
+          <button type="button" id="nl-submit">Subscribe Free</button>
+        </div>
+        <div class="nl-error" id="nl-error">Please enter a valid email address.</div>
       </div>
-      <div class="nl-note">By subscribing you agree to our Privacy Policy. Unsubscribe anytime.</div>
+      <div class="nl-success" id="nl-success">
+        <div class="nl-check">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#e8192c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>You're in!</h3>
+        <p>Thanks for subscribing. Your first digest lands tomorrow morning.</p>
+      </div>
+      <div class="nl-note" id="nl-note">By subscribing you agree to our Privacy Policy. Unsubscribe anytime.</div>
     </div>
 
     <!-- GUIDES -->
@@ -1656,9 +2169,219 @@
   </footer>
 
   <!-- BACK TO TOP -->
-  <a href="#" class="back-top" title="Back to top">
+  <a href="#" class="back-top" id="backTop" title="Back to top" style="opacity:0;pointer-events:none;transition:opacity .3s,transform .18s,box-shadow .18s;">
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 12l5-5 5 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </a>
+
+  <script>
+    (function() {
+
+      /* ── READING PROGRESS BAR ────────────────────────────────── */
+      var progressBar = document.getElementById('progress-bar');
+      function updateProgress() {
+        var doc = document.documentElement;
+        var scrolled = doc.scrollTop || document.body.scrollTop;
+        var total = doc.scrollHeight - doc.clientHeight;
+        var pct = total > 0 ? (scrolled / total) * 100 : 0;
+        progressBar.style.width = pct + '%';
+      }
+
+      /* ── BACK TO TOP VISIBILITY ──────────────────────────────── */
+      var backTop = document.getElementById('backTop');
+      function updateBackTop() {
+        var scrolled = document.documentElement.scrollTop || document.body.scrollTop;
+        if (scrolled > 400) {
+          backTop.style.opacity = '1';
+          backTop.style.pointerEvents = 'auto';
+        } else {
+          backTop.style.opacity = '0';
+          backTop.style.pointerEvents = 'none';
+        }
+      }
+
+      window.addEventListener('scroll', function() {
+        updateProgress();
+        updateBackTop();
+      }, { passive: true });
+
+      /* ── ALERT BANNER DISMISS ────────────────────────────────── */
+      var alertDismiss = document.getElementById('alertDismiss');
+      var alertBanner = document.getElementById('alertBanner');
+      if (alertDismiss) {
+        alertDismiss.addEventListener('click', function() {
+          alertBanner.style.maxHeight = alertBanner.offsetHeight + 'px';
+          requestAnimationFrame(function() {
+            alertBanner.style.transition = 'max-height .35s ease, opacity .35s ease, padding .35s ease';
+            alertBanner.style.maxHeight = '0';
+            alertBanner.style.opacity = '0';
+            alertBanner.style.padding = '0';
+            alertBanner.style.overflow = 'hidden';
+          });
+        });
+      }
+
+      /* ── MOBILE DRAWER ───────────────────────────────────────── */
+      var hamburger = document.getElementById('hamburger');
+      var drawer = document.getElementById('drawer');
+      var drawerOverlay = document.getElementById('drawerOverlay');
+      var drawerClose = document.getElementById('drawerClose');
+
+      function openDrawer() {
+        drawer.classList.add('open');
+        drawerOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeDrawer() {
+        drawer.classList.remove('open');
+        drawerOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+      if (hamburger) hamburger.addEventListener('click', openDrawer);
+      if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
+      if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+
+      /* ── SEARCH OVERLAY ──────────────────────────────────────── */
+      var searchBtn = document.getElementById('searchBtn');
+      var searchOverlay = document.getElementById('searchOverlay');
+      var searchOverlayClose = document.getElementById('searchOverlayClose');
+      var searchOverlayInput = document.getElementById('searchOverlayInput');
+
+      function openSearch() {
+        searchOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        setTimeout(function() { if (searchOverlayInput) searchOverlayInput.focus(); }, 80);
+      }
+      function closeSearch() {
+        searchOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+      if (searchBtn) searchBtn.addEventListener('click', openSearch);
+      if (searchOverlayClose) searchOverlayClose.addEventListener('click', closeSearch);
+      if (searchOverlay) {
+        searchOverlay.addEventListener('click', function(e) {
+          if (e.target === searchOverlay) closeSearch();
+        });
+      }
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeSearch();
+          closeDrawer();
+        }
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+          e.preventDefault();
+          openSearch();
+        }
+      });
+
+      /* ── CATEGORY PILL FILTERING ─────────────────────────────── */
+      var pills = document.querySelectorAll('.cat-pill');
+      var cards = document.querySelectorAll('.card[data-cat]');
+
+      pills.forEach(function(pill) {
+        pill.addEventListener('click', function() {
+          pills.forEach(function(p) { p.classList.remove('active'); });
+          pill.classList.add('active');
+
+          var cat = pill.textContent.trim().toLowerCase();
+          cards.forEach(function(card) {
+            if (cat === 'all') {
+              card.style.display = '';
+            } else {
+              var cardCat = (card.getAttribute('data-cat') || '').toLowerCase();
+              card.style.display = cardCat === cat ? '' : 'none';
+            }
+          });
+        });
+      });
+
+      /* ── INTERSECTION OBSERVER — CARD REVEAL ─────────────────── */
+      var revealEls = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        revealEls.forEach(function(el) { observer.observe(el); });
+      } else {
+        revealEls.forEach(function(el) { el.classList.add('visible'); });
+      }
+
+      /* ── SCORE BARS ANIMATE ON VISIBLE ──────────────────────── */
+      var scoreFills = document.querySelectorAll('.score-bar-fill');
+      if ('IntersectionObserver' in window) {
+        var scoreObs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              var w = entry.target.getAttribute('data-width');
+              entry.target.style.width = w + '%';
+              scoreObs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.5 });
+        scoreFills.forEach(function(el) { scoreObs.observe(el); });
+      } else {
+        scoreFills.forEach(function(el) {
+          el.style.width = el.getAttribute('data-width') + '%';
+        });
+      }
+
+      /* ── NEWSLETTER VALIDATION ───────────────────────────────── */
+      function handleNewsletter(emailId, submitId, formWrapId, successId, errorId, noteId) {
+        var emailEl = document.getElementById(emailId);
+        var submitEl = document.getElementById(submitId);
+        var formWrap = document.getElementById(formWrapId);
+        var successEl = document.getElementById(successId);
+        var errorEl = errorId ? document.getElementById(errorId) : null;
+        var noteEl = noteId ? document.getElementById(noteId) : null;
+
+        if (!submitEl || !emailEl) return;
+
+        submitEl.addEventListener('click', function() {
+          var val = emailEl.value.trim();
+          var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+          if (!valid) {
+            if (errorEl) { errorEl.style.display = 'block'; }
+            emailEl.focus();
+            return;
+          }
+          if (errorEl) errorEl.style.display = 'none';
+          if (formWrap) formWrap.style.display = 'none';
+          if (noteEl) noteEl.style.display = 'none';
+          if (successEl) successEl.style.display = 'flex';
+        });
+
+        if (emailEl) {
+          emailEl.addEventListener('input', function() {
+            if (errorEl) errorEl.style.display = 'none';
+          });
+        }
+      }
+
+      handleNewsletter('nl-email', 'nl-submit', 'nl-form-wrap', 'nl-success', 'nl-error', 'nl-note');
+
+      /* Sidebar newsletter quick handler */
+      var sidebarBtn = document.getElementById('sidebarSubBtn');
+      var sidebarEmail = document.getElementById('sidebarEmail');
+      if (sidebarBtn && sidebarEmail) {
+        sidebarBtn.addEventListener('click', function() {
+          var val = sidebarEmail.value.trim();
+          if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+            sidebarBtn.textContent = '&#10003; Subscribed!';
+            sidebarBtn.style.background = '#107c10';
+            sidebarEmail.disabled = true;
+          } else {
+            sidebarEmail.style.borderColor = 'var(--red)';
+            sidebarEmail.focus();
+          }
+        });
+      }
+
+    })();
+  </script>
 
 </body>
 </html>
