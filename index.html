@@ -11,9 +11,9 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --red: #e8192c;
-      --red-dark: #b5111e;
-      --red-glow: rgba(232,25,44,0.18);
+      --red: #4338ca;
+      --red-dark: #3730a3;
+      --red-glow: rgba(67,56,202,0.18);
       --dark: #0f0f0f;
       --darker: #080808;
       --surface: #161616;
@@ -21,8 +21,8 @@
       --border: #252525;
       --muted: #777;
       --muted2: #555;
-      --white: #f4f4f4;
-      --pure: #ffffff;
+      --white: #ededf8;
+      --pure: #f5f4ff;
       --heading-font: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
       --body-font: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     }
@@ -214,7 +214,7 @@
     .hamburger span { width: 22px; height: 2px; background: var(--white); border-radius: 2px; }
 
     /* Header bottom red line */
-    .header-line { height: 3px; background: linear-gradient(90deg, var(--red) 0%, #ff4d63 50%, var(--red) 100%); }
+    .header-line { height: 3px; background: linear-gradient(90deg, var(--red) 0%, #7c71e0 50%, var(--red) 100%); }
 
     /* ─── BREAKING TICKER ─────────────────────────────────────────── */
     .ticker-wrap { background: var(--red); overflow: hidden; position: relative; }
@@ -358,7 +358,7 @@
     .section-accent {
       width: 4px;
       height: 26px;
-      background: linear-gradient(180deg, #ff4d63, var(--red));
+      background: linear-gradient(180deg, #7c71e0, var(--red));
       border-radius: 2px;
       flex-shrink: 0;
     }
@@ -744,7 +744,7 @@
       position: absolute; top: 50%; left: 50%;
       transform: translate(-50%,-50%);
       width: 46px; height: 46px;
-      background: rgba(232,25,44,.9);
+      background: rgba(67,56,202,.9);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       transition: transform .18s, background .18s;
@@ -856,7 +856,7 @@
       border-top: 1px solid #1a1a1a;
       margin-top: 60px;
     }
-    .footer-stripe { height: 3px; background: linear-gradient(90deg, var(--red-dark), var(--red), #ff4d63, var(--red), var(--red-dark)); }
+    .footer-stripe { height: 3px; background: linear-gradient(90deg, var(--red-dark), var(--red), #7c71e0, var(--red), var(--red-dark)); }
     .footer-inner {
       max-width: 1280px; margin: 0 auto;
       padding: 52px 24px 40px;
@@ -909,12 +909,12 @@
       background: var(--red);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 20px rgba(232,25,44,.4);
+      box-shadow: 0 4px 20px rgba(67,56,202,.4);
       cursor: pointer;
       transition: transform .18s, box-shadow .18s;
       z-index: 100;
     }
-    .back-top:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(232,25,44,.5); }
+    .back-top:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(67,56,202,.5); }
 
     /* ─── RESPONSIVE ──────────────────────────────────────────────── */
     @media (max-width: 1100px) {
@@ -952,19 +952,20 @@
     /* ─── READING PROGRESS BAR ──────────────────────────────────── */
     #progress-bar {
       position: fixed;
-      top: 0; left: 0;
-      height: 3px;
-      width: 0%;
-      background: linear-gradient(90deg, var(--red-dark), var(--red), #ff6b7a);
+      left: 0; top: 0;
+      width: 3px;
+      height: 0%;
+      background: linear-gradient(180deg, var(--red-dark), var(--red), #8b7cf8);
       z-index: 9999;
-      transition: width .05s linear;
+      transition: height .05s linear;
       pointer-events: none;
+      border-radius: 0 2px 2px 0;
     }
 
     /* ─── ALERT BANNER ──────────────────────────────────────────── */
     .alert-banner {
-      background: linear-gradient(90deg, #1a0008, #200010, #1a0008);
-      border-bottom: 1px solid rgba(232,25,44,.35);
+      background: linear-gradient(90deg, #0a0817, #100c24, #0a0817);
+      border-bottom: 1px solid rgba(67,56,202,.35);
       padding: 9px 24px;
       display: flex;
       align-items: center;
@@ -1037,7 +1038,7 @@
     .drawer nav a:hover, .drawer nav a.active {
       color: var(--pure);
       border-left-color: var(--red);
-      background: rgba(232,25,44,.05);
+      background: rgba(67,56,202,.05);
     }
 
     /* ─── SEARCH OVERLAY ────────────────────────────────────────── */
@@ -1150,7 +1151,7 @@
 
     /* ─── DEAL STRIP ────────────────────────────────────────────── */
     .deal-strip {
-      background: linear-gradient(135deg, #0d1520 0%, #1a0815 50%, #0d0d0d 100%);
+      background: linear-gradient(135deg, #0d0d20 0%, #130e30 50%, #0d0d0d 100%);
       border: 1px solid #222;
       border-radius: 10px;
       padding: 24px 28px;
@@ -1270,13 +1271,13 @@
     }
     .nl-success .nl-check {
       width: 52px; height: 52px;
-      background: rgba(232,25,44,.15);
+      background: rgba(67,56,202,.15);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
     }
     .nl-success h3 { font-family: var(--heading-font); font-size: 26px; font-weight: 900; }
     .nl-success p { font-size: 13px; color: #666; }
-    .nl-error { font-size: 12px; color: #ff6b7a; margin-top: 6px; display: none; }
+    .nl-error { font-size: 12px; color: #a78bfa; margin-top: 6px; display: none; }
   </style>
 </head>
 <body>
@@ -1418,14 +1419,14 @@
       <div class="hero-main">
         <svg viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
           <defs>
-            <linearGradient id="hg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0d1b2a"/><stop offset="100%" stop-color="#1a0815"/></linearGradient>
-            <radialGradient id="hr" cx="75%" cy="35%" r="50%"><stop offset="0%" stop-color="rgba(232,25,44,0.12)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+            <linearGradient id="hg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0d1b2a"/><stop offset="100%" stop-color="#0d0820"/></linearGradient>
+            <radialGradient id="hr" cx="75%" cy="35%" r="50%"><stop offset="0%" stop-color="rgba(67,56,202,0.12)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
           </defs>
           <rect width="860" height="520" fill="url(#hg)"/>
           <rect width="860" height="520" fill="url(#hr)"/>
-          <circle cx="680" cy="200" r="180" fill="none" stroke="rgba(232,25,44,0.07)" stroke-width="60"/>
-          <circle cx="680" cy="200" r="100" fill="none" stroke="rgba(232,25,44,0.1)" stroke-width="2"/>
-          <path d="M560 200 L680 140 L680 260 Z" fill="rgba(232,25,44,0.28)"/>
+          <circle cx="680" cy="200" r="180" fill="none" stroke="rgba(67,56,202,0.07)" stroke-width="60"/>
+          <circle cx="680" cy="200" r="100" fill="none" stroke="rgba(67,56,202,0.1)" stroke-width="2"/>
+          <path d="M560 200 L680 140 L680 260 Z" fill="rgba(67,56,202,0.28)"/>
           <rect x="40" y="80" width="280" height="180" rx="6" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
           <rect x="360" y="100" width="180" height="130" rx="4" fill="rgba(255,255,255,0.02)"/>
           <text x="430" y="480" font-family="Arial" font-size="11" fill="rgba(255,255,255,0.08)" text-anchor="middle" letter-spacing="6">HITBOX FEED • FEATURED</text>
@@ -1502,10 +1503,10 @@
         <div class="card-thumb">
           <svg class="ph" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
             <rect width="320" height="180" fill="#0d1a2a"/>
-            <defs><radialGradient id="c1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(229,23,63,0.12)"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+            <defs><radialGradient id="c1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(67,56,202,0.12)"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
             <rect width="320" height="180" fill="url(#c1)"/>
-            <circle cx="160" cy="90" r="42" fill="none" stroke="rgba(229,23,63,0.2)" stroke-width="1.5"/>
-            <path d="M143 72 L180 90 L143 108 Z" fill="rgba(229,23,63,0.45)"/>
+            <circle cx="160" cy="90" r="42" fill="none" stroke="rgba(67,56,202,0.2)" stroke-width="1.5"/>
+            <path d="M143 72 L180 90 L143 108 Z" fill="rgba(67,56,202,0.45)"/>
           </svg>
           <span class="card-tag tag xbox">Xbox</span>
           <span class="badge-ribbon hot">HOT &#x1F525;</span>
@@ -1639,7 +1640,7 @@
         </div>
 
         <div class="list-article">
-          <div class="list-thumb"><svg class="ph" viewBox="0 0 150 90" xmlns="http://www.w3.org/2000/svg"><rect width="150" height="90" fill="#1a0d0d"/><polygon points="75,14 136,76 14,76" fill="none" stroke="rgba(229,23,63,0.2)" stroke-width="1.5"/></svg></div>
+          <div class="list-thumb"><svg class="ph" viewBox="0 0 150 90" xmlns="http://www.w3.org/2000/svg"><rect width="150" height="90" fill="#1a0d0d"/><polygon points="75,14 136,76 14,76" fill="none" stroke="rgba(67,56,202,0.2)" stroke-width="1.5"/></svg></div>
           <div class="list-body">
             <span class="tag">Esports</span>
             <h3><a href="#">Team Liquid Win World Championship in Stunning Comeback — Community Erupts in Celebration</a></h3>
@@ -1766,11 +1767,11 @@
         </div>
 
         <!-- Sidebar newsletter -->
-        <div class="widget" style="background: linear-gradient(145deg, #160008 0%, #220010 100%); border-color: #330015; text-align:center;">
+        <div class="widget" style="background: linear-gradient(145deg, #0c0a1e 0%, #13113a 100%); border-color: #23206a; text-align:center;">
           <div class="widget-title" style="justify-content:center;">Daily Digest</div>
           <p style="font-size:12.5px;color:#666;line-height:1.65;margin-bottom:14px;">Top gaming stories every morning. Zero spam.</p>
-          <input type="email" id="sidebarEmail" placeholder="your@email.com" style="width:100%;background:#0d0007;border:1px solid #2e0010;border-radius:5px;color:white;padding:10px 12px;font-size:12.5px;margin-bottom:8px;outline:none;font-family:inherit;"/>
-          <button id="sidebarSubBtn" style="width:100%;background:var(--red);color:white;border:none;border-radius:5px;padding:10px;font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;font-family:inherit;transition:background .18s;" onmouseover="this.style.background='#b5111e'" onmouseout="this.style.background='var(--red)'">Subscribe Free</button>
+          <input type="email" id="sidebarEmail" placeholder="your@email.com" style="width:100%;background:#080712;border:1px solid #23206a;border-radius:5px;color:white;padding:10px 12px;font-size:12.5px;margin-bottom:8px;outline:none;font-family:inherit;"/>
+          <button id="sidebarSubBtn" style="width:100%;background:var(--red);color:white;border:none;border-radius:5px;padding:10px;font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;font-family:inherit;transition:background .18s;" onmouseover="this.style.background='#3730a3'" onmouseout="this.style.background='var(--red)'">Subscribe Free</button>
         </div>
 
       </aside>
@@ -1803,8 +1804,8 @@
         <div class="card-thumb">
           <svg class="ph" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
             <rect width="320" height="180" fill="#2a1a1a"/>
-            <circle cx="160" cy="90" r="62" fill="none" stroke="rgba(229,23,63,0.14)" stroke-width="20"/>
-            <circle cx="160" cy="90" r="30" fill="rgba(229,23,63,0.06)" stroke="rgba(229,23,63,0.18)" stroke-width="1.5"/>
+            <circle cx="160" cy="90" r="62" fill="none" stroke="rgba(67,56,202,0.14)" stroke-width="20"/>
+            <circle cx="160" cy="90" r="30" fill="rgba(67,56,202,0.06)" stroke="rgba(67,56,202,0.18)" stroke-width="1.5"/>
           </svg>
           <span class="card-tag tag">Opinion</span>
         </div>
@@ -1931,10 +1932,10 @@
 
       <div class="video-card" style="min-height:360px;">
         <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;">
-          <defs><radialGradient id="vg1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(232,25,44,0.18)"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+          <defs><radialGradient id="vg1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(67,56,202,0.18)"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
           <rect width="480" height="360" fill="#0d0d1a"/>
           <rect width="480" height="360" fill="url(#vg1)"/>
-          <circle cx="240" cy="180" r="120" fill="none" stroke="rgba(232,25,44,0.06)" stroke-width="40"/>
+          <circle cx="240" cy="180" r="120" fill="none" stroke="rgba(67,56,202,0.06)" stroke-width="40"/>
         </svg>
         <div class="video-overlay"></div>
         <div class="video-play"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M5 3l11 6-11 6V3z" fill="white"/></svg></div>
@@ -1947,7 +1948,7 @@
       </div>
 
       <div class="video-card" style="min-height:177px;">
-        <svg viewBox="0 0 240 177" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;"><rect width="240" height="177" fill="#1a0a0a"/><circle cx="120" cy="88" r="50" fill="none" stroke="rgba(229,23,63,0.1)" stroke-width="20"/></svg>
+        <svg viewBox="0 0 240 177" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;"><rect width="240" height="177" fill="#1a0a0a"/><circle cx="120" cy="88" r="50" fill="none" stroke="rgba(67,56,202,0.1)" stroke-width="20"/></svg>
         <div class="video-overlay"></div>
         <div class="video-play" style="width:36px;height:36px;"><svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M5 3l11 6-11 6V3z" fill="white"/></svg></div>
         <div class="video-duration">8:45</div>
@@ -2007,7 +2008,7 @@
       </div>
       <div class="nl-success" id="nl-success">
         <div class="nl-check">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#e8192c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#4338ca" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h3>You're in!</h3>
         <p>Thanks for subscribing. Your first digest lands tomorrow morning.</p>
@@ -2183,7 +2184,7 @@
         var scrolled = doc.scrollTop || document.body.scrollTop;
         var total = doc.scrollHeight - doc.clientHeight;
         var pct = total > 0 ? (scrolled / total) * 100 : 0;
-        progressBar.style.width = pct + '%';
+        progressBar.style.height = pct + '%';
       }
 
       /* ── BACK TO TOP VISIBILITY ──────────────────────────────── */
