@@ -1278,6 +1278,171 @@
     .nl-success h3 { font-family: var(--heading-font); font-size: 26px; font-weight: 900; }
     .nl-success p { font-size: 13px; color: #666; }
     .nl-error { font-size: 12px; color: #a78bfa; margin-top: 6px; display: none; }
+
+    /* ─── CUSTOM SCROLLBAR ───────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--darker); }
+    ::-webkit-scrollbar-thumb { background: #28254a; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--red); }
+
+    /* ─── HEADER GLASSMORPHISM ON SCROLL ─────────────────────────── */
+    header { transition: background .3s, box-shadow .3s; }
+    header.scrolled {
+      background: rgba(8,8,8,.8);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 1px 0 rgba(67,56,202,.2), 0 4px 30px rgba(0,0,0,.7);
+    }
+
+    /* ─── CARD BOTTOM ACCENT REVEAL ─────────────────────────────── */
+    .card { position: relative; }
+    .card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--red-dark), var(--red), #7c71e0);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .32s ease;
+      border-radius: 0 0 8px 8px;
+    }
+    .card:hover::after { transform: scaleX(1); }
+
+    /* ─── TICKER PAUSE ON HOVER ──────────────────────────────────── */
+    .ticker-wrap:hover .ticker-inner { animation-play-state: paused; }
+
+    /* ─── SKELETON SHIMMER ───────────────────────────────────────── */
+    @keyframes shimmer {
+      0% { background-position: -400px 0; }
+      100% { background-position: 400px 0; }
+    }
+    .card-thumb.shimmer {
+      background: linear-gradient(90deg, #1a1a1a 25%, #252535 50%, #1a1a1a 75%);
+      background-size: 800px 100%;
+      animation: shimmer 1.6s infinite;
+    }
+
+    /* ─── VIDEO MODAL ────────────────────────────────────────────── */
+    .video-modal {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.92);
+      z-index: 500;
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(8px);
+    }
+    .video-modal.open { display: flex; }
+    .video-modal-inner {
+      width: 92%; max-width: 920px;
+      background: #0d0d1a;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 40px 100px rgba(0,0,0,.9), 0 0 0 1px rgba(67,56,202,.2);
+      animation: modal-in .22s ease;
+    }
+    @keyframes modal-in { from { transform: scale(.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .video-modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 18px;
+      border-bottom: 1px solid #1e1e2e;
+    }
+    .video-modal-title { font-family: var(--heading-font); font-size: 16px; font-weight: 800; color: var(--pure); }
+    .video-modal-close {
+      width: 32px; height: 32px;
+      background: #1e1e2e; border: none; border-radius: 50%;
+      color: #777; font-size: 18px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .18s, color .18s;
+    }
+    .video-modal-close:hover { background: var(--red); color: var(--pure); }
+    .video-modal-screen {
+      aspect-ratio: 16/9;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 14px;
+      background: #08080f;
+      position: relative;
+    }
+    .video-modal-play-ring {
+      width: 72px; height: 72px;
+      background: rgba(67,56,202,.2);
+      border: 2px solid var(--red);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      animation: ring-pulse 2s ease-in-out infinite;
+    }
+    @keyframes ring-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(67,56,202,.4); } 50% { box-shadow: 0 0 0 14px rgba(67,56,202,0); } }
+    .video-modal-screen p { font-size: 12px; color: #555; }
+
+    /* ─── TOAST ──────────────────────────────────────────────────── */
+    #toast {
+      position: fixed; bottom: 88px; right: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--red);
+      border-radius: 8px;
+      padding: 14px 18px;
+      min-width: 270px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.6);
+      z-index: 600;
+      transform: translateX(120%);
+      opacity: 0;
+      transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .35s ease;
+    }
+    #toast.show { transform: translateX(0); opacity: 1; }
+    .toast-title { font-weight: 700; font-size: 13px; color: var(--pure); margin-bottom: 3px; }
+    .toast-body { font-size: 12px; color: var(--muted); }
+
+    /* ─── LOAD MORE ──────────────────────────────────────────────── */
+    .load-more-wrap { text-align: center; margin: 4px 0 36px; }
+    .btn-load-more {
+      background: transparent;
+      border: 1px solid #28254a;
+      color: #666;
+      font-family: var(--body-font);
+      font-size: 11.5px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .09em;
+      padding: 10px 30px; border-radius: 4px;
+      cursor: pointer;
+      transition: all .22s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-load-more:hover { border-color: var(--red); color: var(--white); background: rgba(67,56,202,.08); }
+    .btn-load-more .spin { display: inline-block; }
+    .btn-load-more.loading .spin { animation: spin .7s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── HERO READ MORE BUTTON ──────────────────────────────────── */
+    .hero-read-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--red);
+      color: var(--pure);
+      font-size: 11.5px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: .09em;
+      padding: 9px 20px; border-radius: 4px;
+      margin-top: 2px;
+      transition: background .18s, transform .12s;
+    }
+    .hero-read-btn:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+    /* ─── ANIMATED FOLLOW COUNTER ────────────────────────────────── */
+    .fcount { display: block; transition: opacity .3s; }
+
+    /* ─── SECTION DIVIDER ────────────────────────────────────────── */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 8px 0 0;
+    }
+
+    /* ─── GRADIENT SECTION TITLES ────────────────────────────────── */
+    .section-head h2 {
+      background: linear-gradient(90deg, var(--pure) 60%, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
   </style>
 </head>
 <body>
@@ -1312,6 +1477,28 @@
       <a href="#">Deals</a>
       <a href="#">Esports</a>
     </nav>
+  </div>
+
+  <!-- VIDEO MODAL -->
+  <div class="video-modal" id="videoModal">
+    <div class="video-modal-inner">
+      <div class="video-modal-header">
+        <div class="video-modal-title" id="videoModalTitle">Video</div>
+        <button class="video-modal-close" id="videoModalClose">&#215;</button>
+      </div>
+      <div class="video-modal-screen">
+        <div class="video-modal-play-ring">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M9 6l16 8-16 8V6z" fill="white"/></svg>
+        </div>
+        <p>Video player — embed your video source here</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast">
+    <div class="toast-title" id="toastTitle">Success!</div>
+    <div class="toast-body" id="toastBody">You're all set.</div>
   </div>
 
   <!-- SEARCH OVERLAY -->
@@ -1436,13 +1623,17 @@
           <span class="tag live">&#9679; Breaking</span>
           <h1>GTA VI Release Date Officially Confirmed — Rockstar Sets May 2026 Window for PS5 &amp; Xbox Series X</h1>
           <p class="excerpt">After years of speculation, Rockstar Games has officially locked in a release window, with pre-orders going live and a new trailer expected within the week.</p>
-          <div class="meta">
+          <div class="meta" style="margin-bottom:14px;">
+            <span class="avatar" style="background:#7c3aed;" title="Jamie Wilson">JW</span>
             <span class="author">Jamie Wilson</span>
             <span class="dot">&bull;</span>
             <span>2 hours ago</span>
             <span class="dot">&bull;</span>
             <span>4 min read</span>
+            <span class="dot">&bull;</span>
+            <span>&#128065; 84K views</span>
           </div>
+          <a href="#" class="hero-read-btn">Read Full Story <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M7 3l3.5 3.5L7 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:6px;">
@@ -1578,6 +1769,13 @@
         </div>
       </div>
 
+    </div>
+
+    <!-- LOAD MORE -->
+    <div class="load-more-wrap" id="loadMoreWrap">
+      <button class="btn-load-more" id="loadMoreBtn">
+        <span class="spin">&#10227;</span> Load More Stories
+      </button>
     </div>
 
     <!-- CONTENT + SIDEBAR -->
@@ -1930,7 +2128,7 @@
     </div>
     <div class="video-grid" style="height:360px;margin-bottom:40px;">
 
-      <div class="video-card" style="min-height:360px;">
+      <div class="video-card" style="min-height:360px;" onclick="openVideoModal('GTA VI Trailer 2 — Every Detail and Easter Egg We Found')">
         <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;">
           <defs><radialGradient id="vg1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(67,56,202,0.18)"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
           <rect width="480" height="360" fill="#0d0d1a"/>
@@ -1947,8 +2145,8 @@
         </div>
       </div>
 
-      <div class="video-card" style="min-height:177px;">
-        <svg viewBox="0 0 240 177" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;"><rect width="240" height="177" fill="#1a0a0a"/><circle cx="120" cy="88" r="50" fill="none" stroke="rgba(67,56,202,0.1)" stroke-width="20"/></svg>
+      <div class="video-card" style="min-height:177px;" onclick="openVideoModal('We Played Nintendo Switch 2 For 24 Hours')">
+        <svg viewBox="0 0 240 177" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;"><rect width="240" height="177" fill="#0d0d1a"/><circle cx="120" cy="88" r="50" fill="none" stroke="rgba(67,56,202,0.1)" stroke-width="20"/></svg>
         <div class="video-overlay"></div>
         <div class="video-play" style="width:36px;height:36px;"><svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M5 3l11 6-11 6V3z" fill="white"/></svg></div>
         <div class="video-duration">8:45</div>
@@ -1959,8 +2157,8 @@
         </div>
       </div>
 
-      <div class="video-card" style="min-height:177px;">
-        <svg viewBox="0 0 240 177" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;"><rect width="240" height="177" fill="#0a1a0a"/><circle cx="120" cy="88" r="50" fill="none" stroke="rgba(80,200,80,0.1)" stroke-width="20"/></svg>
+      <div class="video-card" style="min-height:177px;" onclick="openVideoModal('Elden Ring DLC — Full Video Review')">
+        <svg viewBox="0 0 240 177" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;"><rect width="240" height="177" fill="#0d0d1a"/><circle cx="120" cy="88" r="50" fill="none" stroke="rgba(67,56,202,0.12)" stroke-width="20"/></svg>
         <div class="video-overlay"></div>
         <div class="video-play" style="width:36px;height:36px;"><svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M5 3l11 6-11 6V3z" fill="white"/></svg></div>
         <div class="video-duration">22:17</div>
@@ -2200,9 +2398,18 @@
         }
       }
 
+      /* ── HEADER GLASSMORPHISM ────────────────────────────────── */
+      var headerEl = document.querySelector('header');
+      function updateHeader() {
+        var scrolled = document.documentElement.scrollTop || document.body.scrollTop;
+        if (scrolled > 60) { headerEl.classList.add('scrolled'); }
+        else { headerEl.classList.remove('scrolled'); }
+      }
+
       window.addEventListener('scroll', function() {
         updateProgress();
         updateBackTop();
+        updateHeader();
       }, { passive: true });
 
       /* ── ALERT BANNER DISMISS ────────────────────────────────── */
@@ -2371,8 +2578,9 @@
         sidebarBtn.addEventListener('click', function() {
           var val = sidebarEmail.value.trim();
           if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
-            sidebarBtn.textContent = '&#10003; Subscribed!';
-            sidebarBtn.style.background = '#107c10';
+            showToast('You\'re subscribed!', 'Your first digest arrives tomorrow morning.');
+            sidebarBtn.textContent = '✓ Subscribed!';
+            sidebarBtn.style.background = '#3730a3';
             sidebarEmail.disabled = true;
           } else {
             sidebarEmail.style.borderColor = 'var(--red)';
@@ -2381,7 +2589,123 @@
         });
       }
 
+      /* Also show toast on main newsletter success */
+      var nlSubmit = document.getElementById('nl-submit');
+      if (nlSubmit) {
+        nlSubmit.addEventListener('click', function() {
+          setTimeout(function() {
+            if (document.getElementById('nl-success').style.display === 'flex') {
+              showToast('Welcome to the Feed!', '500,000+ readers just got a new member.');
+            }
+          }, 50);
+        });
+      }
+
     })();
+
+    /* ── TOAST ─────────────────────────────────────────────────── */
+    function showToast(title, body) {
+      var toast = document.getElementById('toast');
+      document.getElementById('toastTitle').textContent = title;
+      document.getElementById('toastBody').textContent = body;
+      toast.classList.add('show');
+      setTimeout(function() { toast.classList.remove('show'); }, 3800);
+    }
+
+    /* ── VIDEO MODAL ───────────────────────────────────────────── */
+    function openVideoModal(title) {
+      document.getElementById('videoModalTitle').textContent = title;
+      document.getElementById('videoModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    var videoModalClose = document.getElementById('videoModalClose');
+    var videoModal = document.getElementById('videoModal');
+    if (videoModalClose) {
+      videoModalClose.addEventListener('click', function() {
+        videoModal.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    }
+    if (videoModal) {
+      videoModal.addEventListener('click', function(e) {
+        if (e.target === videoModal) {
+          videoModal.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+      });
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && videoModal) {
+        videoModal.classList.remove('open');
+      }
+    });
+
+    /* ── LOAD MORE ─────────────────────────────────────────────── */
+    var loadMoreBtn = document.getElementById('loadMoreBtn');
+    var loadMoreGrid = document.querySelector('.card-grid.four');
+    var extraCards = [
+      { cat: 'nintendo', tag: 'nintendo', tagLabel: 'Nintendo', badge: 'new', title: 'Super Mario Odyssey 2 Teased in New Nintendo Direct Presentation', author: 'Lily Chen', time: '12h ago', read: '3 min', av: 'LC', avColor: '#e63946' },
+      { cat: 'pc', tag: 'pc', tagLabel: 'PC', badge: 'hot', title: 'Valve Announces Steam Deck 2 with OLED Display and AMD GPU Upgrade', author: 'Owen Park', time: '1 day ago', read: '4 min', av: 'OP', avColor: '#457b9d' },
+      { cat: 'esports', tag: '', tagLabel: 'Esports', badge: '', title: 'FaZe Clan Clinches Championship in Record-Breaking Warzone Tournament', author: 'Dana Mills', time: '1 day ago', read: '5 min', av: 'DM', avColor: '#2a9d8f' },
+      { cat: 'mobile', tag: '', tagLabel: 'Mobile', badge: 'new', title: 'Pokémon GO Introduces Mega Legendary Raids for the First Time', author: 'Rosa Kim', time: '2 days ago', read: '3 min', av: 'RK', avColor: '#e9c46a' },
+    ];
+    var cardsAdded = false;
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', function() {
+        if (cardsAdded) return;
+        loadMoreBtn.classList.add('loading');
+        loadMoreBtn.querySelector('.spin').textContent = '↻';
+        setTimeout(function() {
+          extraCards.forEach(function(d) {
+            var card = document.createElement('div');
+            card.className = 'card reveal';
+            card.setAttribute('data-cat', d.cat);
+            var badgeHtml = d.badge ? '<span class="badge-ribbon ' + d.badge + '">' + (d.badge === 'new' ? 'NEW' : 'HOT 🔥') + '</span>' : '';
+            var tagClass = d.tag ? 'tag ' + d.tag : 'tag';
+            card.innerHTML = '<div class="card-thumb"><svg class="ph" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="180" fill="#13122a"/><circle cx="160" cy="90" r="40" fill="none" stroke="rgba(67,56,202,0.2)" stroke-width="1.5"/></svg><span class="card-tag ' + tagClass + '">' + d.tagLabel + '</span>' + badgeHtml + '</div><div class="card-body"><h3><a href="#">' + d.title + '</a></h3><div class="card-meta"><span class="avatar" style="background:' + d.avColor + ';">' + d.av + '</span><span class="author">' + d.author + '</span><span class="dot">&bull;</span><span>' + d.time + '</span><span class="dot">&bull;</span><span>' + d.read + '</span></div></div>';
+            loadMoreGrid.appendChild(card);
+            requestAnimationFrame(function() {
+              requestAnimationFrame(function() { card.classList.add('visible'); });
+            });
+          });
+          loadMoreBtn.classList.remove('loading');
+          loadMoreBtn.querySelector('.spin').textContent = '✓';
+          loadMoreBtn.textContent = 'All Stories Loaded';
+          loadMoreBtn.style.opacity = '.5';
+          loadMoreBtn.style.cursor = 'default';
+          cardsAdded = true;
+        }, 900);
+      });
+    }
+
+    /* ── ANIMATED FOLLOW COUNTERS ──────────────────────────────── */
+    var counters = document.querySelectorAll('.fcount');
+    function animateCounter(el) {
+      var raw = el.textContent.trim();
+      var multiplier = raw.includes('M') ? 1000000 : (raw.includes('K') ? 1000 : 1);
+      var target = parseFloat(raw) * multiplier;
+      var start = 0;
+      var duration = 1400;
+      var startTime = null;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var progress = Math.min((ts - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        var current = Math.round(start + eased * (target - start));
+        var display = multiplier === 1000000 ? (current / 1000000).toFixed(1) + 'M' : (current >= 1000 ? Math.round(current / 1000) + 'K' : current);
+        el.textContent = display;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    if ('IntersectionObserver' in window) {
+      var cntObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { animateCounter(e.target); cntObs.unobserve(e.target); }
+        });
+      }, { threshold: 0.5 });
+      counters.forEach(function(c) { cntObs.observe(c); });
+    }
   </script>
 
 </body>
